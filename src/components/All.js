@@ -1,13 +1,12 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment} from 'react'
 import Inputtask from './Inputtask'
 import List from './List'
 
 
-const All = ({name, setName, list, setList, active, setActive, editItem}) => {
-
-  const [ savedData,setSavedData ] = useState(false);
+const All = ({name, setName, list, setList, active, setActive, editItem, savedData, setSavedData, handleSubmit}) => {
 
   return (
+    
     <Fragment>
       <Inputtask
       name = {name}
@@ -19,16 +18,19 @@ const All = ({name, setName, list, setList, active, setActive, editItem}) => {
       editItem={editItem}
       active = {active}
       setActive = {setActive}
+      handleSubmit = {handleSubmit}
               
-      />      
-       <List
+      /> 
+
+      { savedData ?  
+        <List
           items = {list}
           setList = {setList}
           editItem={editItem}
           active = {active}
           setActive = {setActive}
-          listType = {'all'}
-            /> 
+        /> 
+        : null}
     </Fragment>
     )
         

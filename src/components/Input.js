@@ -36,7 +36,7 @@ const Taskinput = styled.div`
 `;
 
 
-const Input = ({item, items, setList, removeItem, editItem, active, setActive, id, title, completed}) => {
+const Input = ({item, setList,  editItem, active, setActive, id, title, completed}) => {
 
     
 
@@ -49,7 +49,6 @@ const Input = ({item, items, setList, removeItem, editItem, active, setActive, i
         let newState = e.target.checked
         active = newState;
 
-
         //Avisar al componente padre 
         editItem(id, newState, active, setActive);    
     }
@@ -57,11 +56,12 @@ const Input = ({item, items, setList, removeItem, editItem, active, setActive, i
 
     const classEnabled = enabled ? '' : 'disabled';
 
+
     return (
+        
         <Taskinput>
-            <ul className="list__items" key={id}>
-                {/* <li style={ item.completed ? {textDecorationLine:"line-through"} : null}> */}
-                <li  >
+            <ul className="list__items" >
+                <li>
                     <label
                     htmlFor = {id}
                     className={classEnabled}
@@ -79,7 +79,17 @@ const Input = ({item, items, setList, removeItem, editItem, active, setActive, i
             </ul> 
         </Taskinput>   
 
-      );
+      )
 }
  
 export default Input;
+
+
+
+//  <React.Fragment key={vid.id}>
+//         { vid.video !== '' ? (  
+//             <VideoPlayer id={vid.id} video={vid.video} name={vid.name} poster={vid.poster} />
+//         ) : (
+//             <ImgNoVideo id={vid.id} url={vid.url} name={vid.name} poster={vid.poster} />
+//         )}
+//         </React.Fragment>

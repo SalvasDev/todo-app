@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import List from './List';
+import React from 'react'
+// import List from './List';
 import styled from '@emotion/styled'
 
 const Btndelall = styled.div`
@@ -32,29 +32,34 @@ const Btndelall = styled.div`
 
 
 
-const Completed = (list, setList, editItem) => {
+const Completed = ({name, setName, list, setList, savedData, setSavedData, active, setActive, editItem}) => {
 
 
-const removeItem =  (id) => {
-   setList(list.filter((item) => item.id !== id))
-};
+// const removeItem =  (id) => {
+//    setList(list.filter((item) => item.id !== id))
+// };
 
 
-const clearList =  () => {
-    setList([]);
-  };
+// const clearList =  () => {
+//     setList([]);
+//   };
 
 
   return (
-    <Fragment>
         <Btndelall>
-            {/* <List />  */}
+            {/* <List
+                items = {list}
+                setList = {setList}
+                editItem={editItem}
+                active = {active}
+                setActive = {setActive}
+                listType = {'completed'}
+            />   */}
             <button>
                 <span className="material-symbols-outlined">delete</span>
                 <p>delete all</p>
             </button>
       </Btndelall>
-      </Fragment>
   )
 }
 

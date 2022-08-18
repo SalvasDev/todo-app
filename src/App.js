@@ -59,6 +59,10 @@ function App () {
   const [ name, setName ] = useState('');
   const [ list, setList] = useState([]);
   const [ active, setActive ] = useState(false);
+  const [ savedData, setSavedData ] = useState(false);
+  const [ error, setError ] = useState(false);
+
+
 
   const [ showaall, setShowall ] = useState(true);
   const [ showactive, setShowactive ] = useState(false);
@@ -95,9 +99,21 @@ function App () {
         setShowall(false);     
         } 
     return;
-  } 
+  }
+
+   const handleSubmit =  (e) => {
+    e.preventDefault(); 
+
+    const newItem = {id : new Date().getTime().toString(), title: name, completed: active};
+    setList([...list, newItem]); 
+    setName(''); 
+    setSavedData(true);
+    setActive(false);
+    
+    }
 
   
+
 
 
 
@@ -111,9 +127,18 @@ function App () {
 
   };
 
+
+
+   
+  // const showAlert =  () => {
+  //   setError(true);
+  // };
+
+
   return (
     <Container>
         <h1>#todo</h1>
+
         <div className="menu">
           
           <div className="nav__btn">
@@ -161,25 +186,33 @@ function App () {
         { showaall ? 
          <All 
             name = {name}
+            savedData = {savedData}
+            setSavedData = {setSavedData}
             setName = {setName}
             list = {list}
             setList = {setList}
             active = {active}
             setActive = {setActive}
             editItem={editItem}
+            error = {error}
+            handleSubmit = {handleSubmit}
           
          />
          : null
         }
          { showactive ? 
          <Active
-          name = {name}
-          setName = {setName}
-          list = {list}
-          setList = {setList}
-          editItem={editItem}
-          active = {active}
-          setActive = {setActive}
+            name = {name}
+            savedData = {savedData}
+            setSavedData = {setSavedData}
+            setName = {setName}
+            list = {list}
+            setList = {setList}
+            active = {active}
+            setActive = {setActive}
+            editItem={editItem}
+            error = {error}
+            handleSubmit = {handleSubmit}
            />
          : null
         }
@@ -197,4 +230,4 @@ function App () {
   );
 }
 
-export default App;
+export default App

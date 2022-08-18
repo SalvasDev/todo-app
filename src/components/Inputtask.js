@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react'
-import Error from './Error';
+import React, { Fragment } from 'react'
+// import Error from './Error';
 import styled from '@emotion/styled'
 
 const Row = styled.div`
@@ -53,36 +53,12 @@ const Row = styled.div`
 
 
 
-const Inputtask = ({name, setName, list, setList, savedData, setSavedData, active, setActive, editItem}) => {
-
-
-  const [error, setError] = useState(false);
-
-  
-  const handleSubmit =  (e) => {
-    e.preventDefault();
-    if(name === '') {
-      showAlert();
-    }  else {
-      const newItem = {id : new Date().getTime().toString(), title: name, completed: active};
-      setList([...list, newItem]);
-      setName(''); 
-      setActive(false);
-      setSavedData(true);
-    }
-  };
-
-  
-  const showAlert =  () => {
-    setError(true);
-  };
-
-  
+const Inputtask = ({name, setName, list, setList, active, setActive, editItem, handleSubmit, error, savedData, setSavedData}) => {
 
   return (
     <Fragment>
       <form onSubmit= {handleSubmit}>
-        {error ? <Error msg ='Please enter a value'/> : null }
+        {/* {error ? <Error msg ='Please enter a value'/> : null } */}
         <Row>         
             <div className="inp">
               <input 
