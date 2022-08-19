@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useReducer} from 'react'
 import List from './List';
 import styled from '@emotion/styled'
 
@@ -35,7 +35,7 @@ const Btndelall = styled.div`
 const Completed = ({name, setName, list, setList, savedData, setSavedData, active, setActive, editItem}) => {
 
 
-
+const [any, forceUpdate] = useReducer(num => num + 1, 0);
     
 const removeItem =  (id) => {
     setList(list.filter((item) => item.id !== id))
@@ -49,6 +49,9 @@ const clearList =  () => {
 
   };
 
+  function handleChange(){
+    forceUpdate();
+}
  
 
   return (
@@ -61,6 +64,7 @@ const clearList =  () => {
                 setActive = {setActive}
                 removeItem = {removeItem}
                 listType = {'completed'}
+                handleChange = {handleChange}
             />  
             <button onClick={clearList}>
                 <span className="material-symbols-outlined">delete</span>

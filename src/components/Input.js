@@ -54,7 +54,7 @@ const Taskinput = styled.div`
 `;
 
 
-const Input = ({item, items, list, setList,  removeItem, editItem, active, setActive, id, title, completed, typeList}) => {
+const Input = ({item, items, list, setList,  removeItem, editItem, active, setActive, id, title, completed, typeList, handleChange}) => {
 
     
     const [ enabled, setEnabled ] = useState(!completed);
@@ -65,11 +65,13 @@ const Input = ({item, items, list, setList,  removeItem, editItem, active, setAc
 
         setEnabled(!enabled)
         let newState = e.target.checked
-        active = newState;
-
+        
         //Notify to parent component 
         editItem(id, newState, active, setActive);
-        
+
+        // Force update from Active and Completed components
+        handleChange()
+
     }
 
 

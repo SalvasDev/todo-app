@@ -1,9 +1,15 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useReducer} from 'react'
 import List from './List';
 import Inputtask from './Inputtask'
 
-const Active = ({name, savedData, setSavedData, setName, list, setList, active, setActive, editItem}) => {
+const Active = ({name, setName, savedData, setSavedData, list, setList, active, setActive, editItem, handleSubmit}) => {
 
+const [any, forceUpdate] = useReducer(num => num + 1, 0);
+
+function handleChange(){
+    forceUpdate();
+}
+ 
 
   return (
     <Fragment>
@@ -11,15 +17,16 @@ const Active = ({name, savedData, setSavedData, setName, list, setList, active, 
       name = {name}
       setName = {setName}
       list = {list}
-      setList = {setList}
+      setList = {setList} 
       savedData = {savedData}
       setSavedData = {setSavedData}  
       editItem={editItem}
       active = {active}
-      setActive = {setActive}
-      
-              
-      />      
+      setActive = {setActive} 
+      handleSubmit = {handleSubmit}
+   
+    />      
+    
      <List
           items = {list}
           setList = {setList}
@@ -27,7 +34,9 @@ const Active = ({name, savedData, setSavedData, setName, list, setList, active, 
           active = {active}
           setActive = {setActive} 
           typeList = 'active'
+          handleChange= {handleChange}
         /> 
+
     </Fragment>
     )
 }

@@ -58,7 +58,6 @@ const Inputtask = ({name, setName, list, setList, active, setActive, editItem, h
   return (
     <Fragment>
       <form onSubmit= {handleSubmit}>
-        {/* {error ? <Error msg ='Please enter a value'/> : null } */}
         <Row>         
             <div className="inp">
               <input 

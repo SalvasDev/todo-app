@@ -3,9 +3,10 @@ import Input from './Input';
 
 
 
-const List = ( {items, list, setList, removeItem, editItem, active, setActive, typeList } ) => {
+const List = ( {items, list, setList, removeItem, editItem, active, setActive, typeList, handleChange } ) => {
     
 
+    
     return (
 
 
@@ -53,12 +54,13 @@ const List = ( {items, list, setList, removeItem, editItem, active, setActive, t
                     id = {id}
                     title = {title}
                     completed = {completed}
-                    items = {list}
+                    items = {items}
                     setList = {setList}
                     editItem = {editItem}
                     active = {active}
                     setActive = {setActive}
                     typeList = 'active'
+                    handleChange = {handleChange}
                     />   
                     </Fragment>
                           
@@ -75,6 +77,7 @@ const List = ( {items, list, setList, removeItem, editItem, active, setActive, t
                     key= {id.toString()} value={id}
                     id = {id}
                     title = {title}
+                    items = {items}
                     completed = {completed}
                     setList = {setList}
                     removeItem = {removeItem}
@@ -82,7 +85,8 @@ const List = ( {items, list, setList, removeItem, editItem, active, setActive, t
                     active = {active}
                     setActive = {setActive}
                     typeList = 'completed'
-                    />                             
+                    handleChange = {handleChange}
+                   />                             
                 )
             })
 
