@@ -51,6 +51,12 @@ const Taskinput = styled.div`
     .btn__small {
         font-size: 18px;
     }
+
+    @media(max-width: 466px) {
+        li {
+            text-align: left;
+        }
+    }
 `;
 
 
