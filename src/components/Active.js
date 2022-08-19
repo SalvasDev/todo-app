@@ -5,7 +5,6 @@ import Inputtask from './Inputtask'
 const Active = ({name, savedData, setSavedData, setName, list, setList, active, setActive, editItem}) => {
 
 
-
   return (
     <Fragment>
       <Inputtask
@@ -18,6 +17,7 @@ const Active = ({name, savedData, setSavedData, setName, list, setList, active, 
       editItem={editItem}
       active = {active}
       setActive = {setActive}
+      
               
       />      
      <List
@@ -25,8 +25,8 @@ const Active = ({name, savedData, setSavedData, setName, list, setList, active, 
           setList = {setList}
           editItem={editItem}
           active = {active}
-          setActive = {setActive}
-          listType = {'active'}
+          setActive = {setActive} 
+          typeList = 'active'
         /> 
     </Fragment>
     )

@@ -3,9 +3,9 @@ import Input from './Input';
 
 
 
-const List = ( {items, setList, removeItem, editItem, active, setActive, typeList} ) => {
+const List = ( {items, list, setList, removeItem, editItem, active, setActive, typeList } ) => {
     
-  
+
     return (
 
 
@@ -13,7 +13,7 @@ const List = ( {items, setList, removeItem, editItem, active, setActive, typeLis
                          
 
 
-         { typeList === 'all' ?
+         { typeList === 'All' ?
          
          
            items.map((item) => {           
@@ -28,51 +28,51 @@ const List = ( {items, setList, removeItem, editItem, active, setActive, typeLis
                     id = {id}
                     title = {title}
                     completed = {completed}
+                    list = {items}
                     setList = {setList}
                     editItem = {editItem}
                     active = {active}
                     setActive = {setActive}
+                    typeList = 'all'
                     />
                              
                 )
             })
 
             
-            : typeList === 'active' ?
-
-            items.map((item) => {           
+            : typeList === 'active' ? 
+            
+            items.filter(item1 => item1.completed === false).map((item) => {           
            
             const {id, title, completed} = item;   
-
+                
                 return ( 
                     <Fragment>
-                    <h1>aqui es active</h1>
-                    {console.log('aqui es active')}
                     <Input
                     key={id.toString()} value={id}
                     id = {id}
                     title = {title}
                     completed = {completed}
+                    items = {list}
                     setList = {setList}
                     editItem = {editItem}
                     active = {active}
                     setActive = {setActive}
+                    typeList = 'active'
                     />   
                     </Fragment>
                           
                 )
             })
+            
 
-
-            : 
-            items.map((item) => {           
+            : items.filter(item1 => item1.completed === true).map((item) => {            
            
             const {id, title, completed} = item;   
-
-                       
+    
                 return (    
                     <Input
-                    key={id.toString()} value={id}
+                    key= {id.toString()} value={id}
                     id = {id}
                     title = {title}
                     completed = {completed}
@@ -81,6 +81,7 @@ const List = ( {items, setList, removeItem, editItem, active, setActive, typeLis
                     editItem = {editItem}
                     active = {active}
                     setActive = {setActive}
+                    typeList = 'completed'
                     />                             
                 )
             })

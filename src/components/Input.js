@@ -22,6 +22,11 @@ const Taskinput = styled.div`
 
     }
 
+    li {
+        display: flex;
+        align-items: center;
+    }
+
     .disabled {
         text-decoration-line: line-through;
     }
@@ -32,33 +37,47 @@ const Taskinput = styled.div`
         width: 24px;
         height: 24px;
         margin-right: 1rem;
-    }  
+    } 
+    
+   .btn__del {
+        background-color: transparent;
+        color: #BDBDBD;
+        margin-right: 2rem;
+        padding: 0;
+        width: 14px;
+        height: 18px;
+    }
+
+    .btn__small {
+        font-size: 18px;
+    }
 `;
 
 
-const Input = ({item, setList,  editItem, active, setActive, id, title, completed}) => {
+const Input = ({item, items, list, setList,  removeItem, editItem, active, setActive, id, title, completed, typeList}) => {
 
     
+    const [ enabled, setEnabled ] = useState(!completed);
 
-    const [ enabled, setEnabled ] = useState(true);
-
+    
     const handleCheckbox = (id, e ) => {
         
-        setEnabled(!enabled)
 
+        setEnabled(!enabled)
         let newState = e.target.checked
         active = newState;
 
-        //Avisar al componente padre 
-        editItem(id, newState, active, setActive);    
+        //Notify to parent component 
+        editItem(id, newState, active, setActive);
+        
     }
 
 
-    const classEnabled = enabled ? '' : 'disabled';
+    let classEnabled = enabled ? '' : 'disabled';   
+    let defCheck = completed ? true : false;
 
-
+ 
     return (
-        
         <Taskinput>
             <ul className="list__items" >
                 <li>
@@ -68,13 +87,18 @@ const Input = ({item, setList,  editItem, active, setActive, id, title, complete
                     >
                         <input
                             checked={id.active}
+                            defaultChecked={ defCheck}
                             id = {id} 
                             name = {title}
                             type= "checkbox"  
                             onChange = { e => {handleCheckbox(id, e)} }
                             />
                             {title}
-                    </label>                    
+                    </label>   
+                    {typeList === 'completed' && 
+                         <button className="btn__del" onClick={() => removeItem(id)}>
+                           <span className="material-symbols-outlined btn__small">delete</span>
+                        </button>}                 
                 </li>
             </ul> 
         </Taskinput>   
@@ -86,10 +110,3 @@ export default Input;
 
 
 
-//  <React.Fragment key={vid.id}>
-//         { vid.video !== '' ? (  
-//             <VideoPlayer id={vid.id} video={vid.video} name={vid.name} poster={vid.poster} />
-//         ) : (
-//             <ImgNoVideo id={vid.id} url={vid.url} name={vid.name} poster={vid.poster} />
-//         )}
-//         </React.Fragment>

@@ -1,9 +1,10 @@
-import React, { Fragment} from 'react'
+import React, { Fragment } from 'react'
 import Inputtask from './Inputtask'
 import List from './List'
 
 
 const All = ({name, setName, list, setList, active, setActive, editItem, savedData, setSavedData, handleSubmit}) => {
+
 
   return (
     
@@ -22,15 +23,14 @@ const All = ({name, setName, list, setList, active, setActive, editItem, savedDa
               
       /> 
 
-      { savedData ?  
         <List
           items = {list}
           setList = {setList}
           editItem={editItem}
           active = {active}
           setActive = {setActive}
+          typeList = 'All'
         /> 
-        : null}
     </Fragment>
     )
         

@@ -1,5 +1,5 @@
 import React from 'react'
-// import List from './List';
+import List from './List';
 import styled from '@emotion/styled'
 
 const Btndelall = styled.div`
@@ -35,27 +35,34 @@ const Btndelall = styled.div`
 const Completed = ({name, setName, list, setList, savedData, setSavedData, active, setActive, editItem}) => {
 
 
-// const removeItem =  (id) => {
-//    setList(list.filter((item) => item.id !== id))
-// };
 
+    
+const removeItem =  (id) => {
+    setList(list.filter((item) => item.id !== id))
+    localStorage.setItem("list", JSON.stringify(list));      
 
-// const clearList =  () => {
-//     setList([]);
-//   };
+};
 
+const clearList =  () => {
+     setList(list.filter((item) => item.completed === false))
+    localStorage.setItem("list", JSON.stringify(list));      
+
+  };
+
+ 
 
   return (
         <Btndelall>
-            {/* <List
+            <List
                 items = {list}
                 setList = {setList}
                 editItem={editItem}
                 active = {active}
                 setActive = {setActive}
+                removeItem = {removeItem}
                 listType = {'completed'}
-            />   */}
-            <button>
+            />  
+            <button onClick={clearList}>
                 <span className="material-symbols-outlined">delete</span>
                 <p>delete all</p>
             </button>

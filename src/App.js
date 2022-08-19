@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Error from './components/Error';
 import Subbutton1 from './components/Subbutton1';
 import Subbutton2 from './components/Subbutton2';
 import Subbutton3 from './components/Subbutton3';
@@ -55,12 +56,21 @@ const Container = styled.div`
 
 function App () {
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return (list = JSON.parse(localStorage.getItem("list")))
+  } else {
+     return [];
+  }  
+};
+
+
 
   const [ name, setName ] = useState('');
-  const [ list, setList] = useState([]);
+  const [ list, setList] = useState(getLocalStorage());
   const [ active, setActive ] = useState(false);
   const [ savedData, setSavedData ] = useState(false);
-  const [ error, setError ] = useState(false);
 
 
 
@@ -68,7 +78,13 @@ function App () {
   const [ showactive, setShowactive ] = useState(false);
   const [ showcompleted, setShowcompleted ] = useState(false);
 
-  
+
+
+useEffect(() => {
+      localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
+
+
   const showaAllOn = (e, show) => {
     e.preventDefault()
     if (show) {
@@ -101,40 +117,34 @@ function App () {
     return;
   }
 
+
    const handleSubmit =  (e) => {
     e.preventDefault(); 
-
-    const newItem = {id : new Date().getTime().toString(), title: name, completed: active};
+    if ( name === '') {
+       <Error mensaje = 'Please enter a value' />
+       return;
+      } else {
+    const newItem = {id : new Date().getTime().toString(), title: name, completed: false};
     setList([...list, newItem]); 
     setName(''); 
     setSavedData(true);
-    setActive(false);
-    
+      }
     }
 
-  
+ 
 
+  const editItem =  (id, newState, active, setActive ) => {
 
-
-
-  const editItem =  (id, checked, active, setActive ) => {
-
-    const editItem = list.find((item) => item.id === id);
-      
-    editItem.completed = checked;
-  
-    setActive(checked)
-
+    const foundItem = list.find((item) => item.id === id);
+    foundItem['completed'] = newState;
+    setActive(newState);
+    localStorage.setItem("list", JSON.stringify(list)); 
   };
 
 
 
-   
-  // const showAlert =  () => {
-  //   setError(true);
-  // };
-
-
+    
+ 
   return (
     <Container>
         <h1>#todo</h1>
@@ -194,7 +204,6 @@ function App () {
             active = {active}
             setActive = {setActive}
             editItem={editItem}
-            error = {error}
             handleSubmit = {handleSubmit}
           
          />
@@ -211,15 +220,22 @@ function App () {
             active = {active}
             setActive = {setActive}
             editItem={editItem}
-            error = {error}
             handleSubmit = {handleSubmit}
            />
          : null
         }
 
         { showcompleted ? 
-         <Completed
-          editItem={editItem}
+         <Completed 
+            name = {name}
+            savedData = {savedData}
+            setSavedData = {setSavedData}
+            setName = {setName}
+            list = {list}
+            setList = {setList}
+            active = {active}
+            setActive = {setActive}
+            editItem={editItem}
          />
          : null
         }
